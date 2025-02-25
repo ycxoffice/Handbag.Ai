@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   ShoppingBag,
   Star,
@@ -14,6 +15,7 @@ import { Link } from "react-router-dom";
 
 const LandingPage = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setIsVisible(true);
@@ -30,20 +32,6 @@ const LandingPage = () => {
               <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">
                 HandBag.ai
               </span>
-            </div>
-            <div className="hidden md:flex space-x-8 text-gray-600">
-              <a href="#" className="hover:text-purple-600 transition-colors">
-                Products
-              </a>
-              <a href="#" className="hover:text-purple-600 transition-colors">
-                About
-              </a>
-              <a href="#" className="hover:text-purple-600 transition-colors">
-                Sustainability
-              </a>
-              <a href="#" className="hover:text-purple-600 transition-colors">
-                Contact
-              </a>
             </div>
           </div>
         </div>
@@ -79,6 +67,14 @@ const LandingPage = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="flex justify-center my-8">
+        <button
+          onClick={() => navigate("/companies")}
+          className="px-6 py-3 text-lg font-semibold text-white bg-gradient-to-r from-purple-600 to-pink-600 rounded-full shadow-lg hover:scale-105 transition-transform"
+        >
+          Explore Companies
+        </button>
       </div>
 
       {/* Stats Section */}

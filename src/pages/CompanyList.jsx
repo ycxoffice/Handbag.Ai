@@ -89,11 +89,11 @@ function CompanyList() {
     return matchesSearch && matchesExchange && matchesSector;
   });
 
-   const [isVisible, setIsVisible] = useState(false);
-  
-    useEffect(() => {
-      setIsVisible(true);
-    }, []);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
 
   if (loading)
     return (
@@ -128,17 +128,8 @@ function CompanyList() {
               </span>
             </div>
             <div className="hidden md:flex space-x-8 text-gray-600">
-              <a href="#" className="hover:text-purple-600 transition-colors">
-                Products
-              </a>
-              <a href="#" className="hover:text-purple-600 transition-colors">
-                About
-              </a>
-              <a href="#" className="hover:text-purple-600 transition-colors">
-                Sustainability
-              </a>
-              <a href="#" className="hover:text-purple-600 transition-colors">
-                Contact
+              <a href="/" className="hover:text-purple-600 transition-colors">
+                Home
               </a>
             </div>
           </div>
@@ -153,45 +144,53 @@ function CompanyList() {
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto">
-          <div className="pt-24 pb-12">
-        <div className="container mx-auto px-6">
-          <div
-            className={`transform transition-all duration-1000 ${
-              isVisible
-                ? "translate-y-0 opacity-100"
-                : "translate-y-10 opacity-0"
-            }`}
-          >
-            <h1 className="text-5xl md:text-7xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">
-              Redefining Luxury
-              <br />
-              Through AI
-            </h1>
-            <p className="text-xl text-center text-gray-600 mb-8 max-w-2xl mx-auto">
-              Experience the future of fashion with AI-powered personalization
-              and sustainable luxury handbags.
-            </p>
-          </div>
-        </div>
-      </div>
+            <div className="pt-24 pb-12">
+              <div className="container mx-auto px-6">
+                <div
+                  className={`transform transition-all duration-1000 ${
+                    isVisible
+                      ? "translate-y-0 opacity-100"
+                      : "translate-y-10 opacity-0"
+                  }`}
+                >
+                  <h1 className="text-5xl md:text-7xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">
+                    Redefining Luxury
+                    <br />
+                    Through AI
+                  </h1>
+                  <p className="text-xl text-center text-gray-600 mb-8 max-w-2xl mx-auto">
+                    Experience the future of fashion with AI-powered
+                    personalization and sustainable luxury handbags.
+                  </p>
+                </div>
+              </div>
+            </div>
 
             {/* Stats Cards */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
               <div className="bg-gradient-to-br from-gray-800 to-gray-900 p-6 rounded-lg border border-gray-700 backdrop-blur-sm">
                 <p className="text-gray-400 mb-2 text-sm">Average Growth</p>
-                <p className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">+127%</p>
+                <p className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">
+                  +127%
+                </p>
               </div>
               <div className="bg-gradient-to-br from-gray-800 to-gray-900 p-6 rounded-lg border border-gray-700 backdrop-blur-sm">
                 <p className="text-gray-400 mb-2 text-sm">Companies Tracked</p>
-                <p className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">500+</p>
+                <p className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">
+                  500+
+                </p>
               </div>
               <div className="bg-gradient-to-br from-gray-800 to-gray-900 p-6 rounded-lg border border-gray-700 backdrop-blur-sm">
                 <p className="text-gray-400 mb-2 text-sm">Success Rate</p>
-                <p className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">84%</p>
+                <p className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">
+                  84%
+                </p>
               </div>
               <div className="bg-gradient-to-br from-gray-800 to-gray-900 p-6 rounded-lg border border-gray-700 backdrop-blur-sm">
                 <p className="text-gray-400 mb-2 text-sm">Daily Updates</p>
-                <p className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">24/7</p>
+                <p className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">
+                  24/7
+                </p>
               </div>
             </div>
 
@@ -513,8 +512,6 @@ function CompanyList() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-         
-
             <div className="bg-gradient-to-br from-white-800 to-white-400 p-8 rounded-xl border border-purple-700 backdrop-blur-sm relative group hover:border-purple-500/50 transition-all">
               {/* <div className="absolute top-0 right-0 w-24 h-24 bg-green-500 rounded-full filter blur-[80px] opacity-10 group-hover:opacity-20 transition-opacity"></div> */}
 
@@ -522,11 +519,11 @@ function CompanyList() {
                 <AlertTriangle className="h-6 w-6" />
               </div>
               <h3 className="text-xl text-gray-700 font-bold mb-4 group-hover:text-purple-400 transition-colors">
-              Market Analytics
+                Market Analytics
               </h3>
               <p className="text-gray-400">
-              Real-time valuation tracking and market performance metrics to
-              keep you informed of every market movement.
+                Real-time valuation tracking and market performance metrics to
+                keep you informed of every market movement.
               </p>
               <div className="mt-6 pt-6 border-t border-gray-700">
                 <a
@@ -561,8 +558,8 @@ function CompanyList() {
                 Growth Score
               </h3>
               <p className="text-gray-400">
-              Proprietary AI-driven growth potential scoring system that
-              predicts future market performance with remarkable accuracy.
+                Proprietary AI-driven growth potential scoring system that
+                predicts future market performance with remarkable accuracy.
               </p>
               <div className="mt-6 pt-6 border-t border-gray-700">
                 <a
