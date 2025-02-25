@@ -8,7 +8,9 @@ import {
   Instagram,
   Twitter,
   Linkedin,
+  Play,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const LandingPage = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -66,6 +68,15 @@ const LandingPage = () => {
               Experience the future of fashion with AI-powered personalization
               and sustainable luxury handbags.
             </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link to={'/companies'} className="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-medium hover:shadow-lg transition-shadow">
+                Start Free Trial
+              </Link>
+              <button className="w-full sm:w-auto px-8 py-4 rounded-full border border-gray-300 flex items-center justify-center text-gray-700 font-medium hover:bg-gray-50 transition-colors">
+                <Play className="h-4 w-4 mr-2" />
+                Watch Demo
+              </button>
+            </div>
           </div>
         </div>
       </div>
