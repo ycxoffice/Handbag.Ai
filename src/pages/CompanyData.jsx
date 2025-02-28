@@ -10,18 +10,14 @@ function CompanyData() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Google Sheets API endpoint - keeping the same logic
         const sheetId = "1F1W4eRr8Y-d49L9765gbQLOsDg8CJe11eU8BAvhJwHc";
-        const tabId = "0";  
+        const tabId = "0";
         const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&gid=${tabId}`;
 
         const response = await fetch(url);
         const text = await response.text();
-
-        // Parse the JSON-like response from Google Sheets - maintaining same logic
         const jsonData = JSON.parse(text.substring(47).slice(0, -2));
 
-        // Extract column headers and company data - maintaining same logic
         const headers = jsonData.table.cols.map((col) => col.label);
         const rows = jsonData.table.rows.map((row) => {
           const companyData = {};
@@ -33,7 +29,6 @@ function CompanyData() {
           return companyData;
         });
 
-        // Find the specific company - maintaining same logic
         const foundCompany = rows.find(
           (comp) => decodeURIComponent(companyName) === comp["Company Name"]
         );
@@ -56,7 +51,7 @@ function CompanyData() {
 
   if (loading)
     return (
-      <div className="flex justify-center items-center h-screen  bg-white/80">
+      <div className="flex justify-center items-center h-screen bg-gray-900">
         <div className="relative w-24 h-24">
           <div className="absolute top-0 left-0 w-full h-full border-4 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
           <div className="absolute top-2 left-2 w-20 h-20 border-4 border-pink-400 border-t-transparent rounded-full animate-spin"></div>
@@ -84,12 +79,12 @@ function CompanyData() {
               />
             </svg>
             <p className="text-xl font-bold text-red-400 mb-2">{error}</p>
-            <p className="text-gray-700 mb-6">
+            <p className="text-gray-300 mb-6">
               We couldn't find the company you're looking for.
             </p>
             <Link
               to="/"
-              className="inline-flex items-center px-6 py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-800 text-white hover:from-emerald-500 hover:to-emerald-700 transition-all duration-300 shadow-lg shadow-emerald-700/30"
+              className="inline-flex items-center px-6 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-500 hover:to-pink-500 transition-all duration-300 shadow-lg shadow-purple-700/30"
             >
               <svg
                 className="w-5 h-5 mr-2"
@@ -113,7 +108,7 @@ function CompanyData() {
 
   if (!company) return null;
 
-   const generalInfo = [
+  const generalInfo = [
     "Industry",
     "Product Category",
     "Target Audience",
@@ -122,11 +117,7 @@ function CompanyData() {
     "Headquarters",
     "Number of Employees(approx)",
   ];
-  const financialInfo = [
-    "Revenue",
-    "Company Valuation",
-    "Funding Raised",
-  ];
+  const financialInfo = ["Revenue", "Company Valuation", "Funding Raised"];
   const marketInfo = [
     "Celebrity Endorsements / Collaborations",
     "Retail & E-commerce Presence",
@@ -138,11 +129,11 @@ function CompanyData() {
   const socialInfo = ["Social Media Presence"];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white-900 via-pink-100 to-white text-gray-100">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 text-gray-100">
       <div className="container mx-auto px-4 py-8">
         <Link
           to="/companies"
-          className="inline-flex items-center bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600 mb-8 transition-all duration-300 group"
+          className="inline-flex items-center bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400 mb-8 transition-all duration-300 group hover:from-purple-300 hover:to-pink-300"
         >
           <div className="bg-pink-400/30 p-2 rounded-full mr-3 group-hover:bg-pink-400/80 transition-all">
             <svg
@@ -162,12 +153,11 @@ function CompanyData() {
           <span className="text-lg">Back to company directory</span>
         </Link>
 
-        <div className="bg-white-800/20 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden border border-gray-700/50 relative">
-          {/* Decorative elements */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-white-500/10 rounded-full filter blur-3xl"></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-white-500/10 rounded-full filter blur-3xl"></div>
+        <div className="bg-gray-800/40 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden border border-purple-500/30 relative">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/10 rounded-full filter blur-3xl"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-pink-500/10 rounded-full filter blur-3xl"></div>
 
-          <div className="bg-gradient-to-r from-purple-600 to-pink-600 p-8 relative overflow-hidden">
+          <div className="bg-gradient-to-r from-purple-700 to-pink-600 p-8 relative overflow-hidden">
             <div className="absolute -right-20 -top-20 bg-white/10 w-60 h-60 rounded-full blur-3xl"></div>
             <div className="absolute -left-10 -bottom-10 bg-white-400/20 w-40 h-40 rounded-full blur-xl"></div>
 
@@ -215,8 +205,8 @@ function CompanyData() {
 
           <div className="p-8">
             {company["Company Description"] && (
-              <div className="mb-10 bg-gray-800/20 p-6 rounded-2xl border border-gray-700/50 backdrop-blur-sm">
-                <h2 className="text-xl font-semibold text-white mb-4 flex items-center">
+              <div className="mb-10 bg-gray-800/30 p-6 rounded-2xl border border-purple-500/20 backdrop-blur-sm">
+                <h2 className="text-xl font-semibold text-pink-300 mb-4 flex items-center">
                   <svg
                     className="w-5 h-5 mr-3 text-emerald-400"
                     fill="none"
@@ -233,15 +223,15 @@ function CompanyData() {
                   </svg>
                   About
                 </h2>
-                <p className="text-gray-300 leading-relaxed">
+                <p className="text-gray-200 leading-relaxed">
                   {company["Company Description"]}
                 </p>
               </div>
             )}
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div className="bg-gradient-to-r from-purple-600/60 to-pink-600/60 p-6 rounded-2xl border border-gray-700/50 backdrop-blur-sm  transition-colors duration-300">
-                <h2 className="text-xl font-semibold text-white mb-5 flex items-center">
+              <div className="bg-gray-800/40 p-6 rounded-2xl border border-purple-500/30 backdrop-blur-sm hover:border-pink-400/30 transition-all duration-300">
+                <h2 className="text-xl font-semibold text-pink-300 mb-5 flex items-center">
                   <div className="bg-gray-700/50 p-1.5 rounded-lg mr-3">
                     <svg
                       className="w-5 h-5 text-pink-400"
@@ -265,7 +255,7 @@ function CompanyData() {
                     (key) =>
                       company[key] && (
                         <div key={key} className="flex flex-col">
-                          <span className="text-gray-700 text-sm font-medium mb-1">
+                          <span className="text-pink-200 text-sm font-medium mb-1">
                             {key}
                           </span>
                           <span className="text-white font-medium text-lg">
@@ -277,8 +267,8 @@ function CompanyData() {
                 </div>
               </div>
 
-              <div className="bg-gradient-to-r from-purple-600/60 to-pink-600/60 p-6 rounded-2xl border border-gray-700/50 backdrop-blur-sm  transition-colors duration-300">
-                <h2 className="text-xl font-semibold text-white mb-5 flex items-center">
+              <div className="bg-gray-800/40 p-6 rounded-2xl border border-purple-500/30 backdrop-blur-sm hover:border-pink-400/30 transition-all duration-300">
+                <h2 className="text-xl font-semibold text-pink-300 mb-5 flex items-center">
                   <div className="bg-gray-700/50 p-1.5 rounded-lg mr-3">
                     <svg
                       className="w-5 h-5 text-pink-400"
@@ -302,7 +292,7 @@ function CompanyData() {
                     (key) =>
                       company[key] && (
                         <div key={key} className="flex flex-col">
-                          <span className="text-gray-700 text-sm font-medium mb-1">
+                          <span className="text-pink-200 text-sm font-medium mb-1">
                             {key}
                           </span>
                           <span className="text-white font-medium text-lg">
@@ -317,8 +307,8 @@ function CompanyData() {
                 </div>
               </div>
 
-              <div className="bg-gradient-to-r from-purple-600/60 to-pink-600/60 p-6 rounded-2xl border border-gray-700/50 backdrop-blur-sm  transition-colors duration-300">
-                <h2 className="text-xl font-semibold text-white mb-5 flex items-center">
+              <div className="bg-gray-800/40 p-6 rounded-2xl border border-purple-500/30 backdrop-blur-sm hover:border-pink-400/30 transition-all duration-300">
+                <h2 className="text-xl font-semibold text-pink-300 mb-5 flex items-center">
                   <div className="bg-gray-700/50 p-1.5 rounded-lg mr-3">
                     <svg
                       className="w-5 h-5 text-pink-400"
@@ -342,7 +332,7 @@ function CompanyData() {
                     (key) =>
                       company[key] && (
                         <div key={key} className="flex flex-col">
-                          <span className="text-gray-700 text-sm font-medium mb-1">
+                          <span className="text-pink-200 text-sm font-medium mb-1">
                             {key}
                           </span>
                           <span className="text-white font-medium text-lg">
@@ -356,8 +346,8 @@ function CompanyData() {
             </div>
 
             <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-gradient-to-r from-purple-600/60 to-pink-600/60 p-6 rounded-2xl border border-gray-700/50 backdrop-blur-sm  transition-colors duration-300">
-            <h2 className="text-xl font-semibold text-white mb-5 flex items-center">
+              <div className="bg-gray-800/40 p-6 rounded-2xl border border-purple-500/30 backdrop-blur-sm hover:border-pink-400/30 transition-all duration-300">
+                <h2 className="text-xl font-semibold text-pink-300 mb-5 flex items-center">
                   <div className="bg-gray-700/50 p-1.5 rounded-lg mr-3">
                     <svg
                       className="w-5 h-5 text-pink-400"
@@ -381,31 +371,48 @@ function CompanyData() {
                     (key) =>
                       company[key] && (
                         <div key={key} className="flex flex-col">
-                          <span className="text-gray-700 text-sm font-medium mb-2">
+                          <span className="text-pink-200 text-sm font-medium mb-2">
                             {key}
                           </span>
-                          <span className="text-white">
-                            {company[key].includes("LinkedIn:") ? (
-                              <div
-                                dangerouslySetInnerHTML={{
-                                  __html: company[key].replace(
-                                    /(https:\/\/www\.linkedin\.com\/[^\s,]+)/g,
-                                    '<a href="$1" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:text-emerald-300 transition-colors hover:underline">LinkedIn Profile</a>'
-                                  ),
-                                }}
-                              />
-                            ) : (
-                              company[key]
-                            )}
-                          </span>
+                          <div className="flex flex-col gap-2">
+                            {company[key].split(",").map((item, index) => {
+                              const linkedinUrl =
+                                item.match(/https:\/\/[^\s]+/)?.[0];
+                              return (
+                                <div key={index} className="group">
+                                  {linkedinUrl ? (
+                                    <a
+                                      href={linkedinUrl}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="text-emerald-300 hover:text-emerald-200 transition-colors flex items-center"
+                                    >
+                                      {item.replace(linkedinUrl, "").trim()}
+                                      <svg
+                                        className="w-4 h-4 ml-2 opacity-70 group-hover:opacity-100"
+                                        fill="currentColor"
+                                        viewBox="0 0 24 24"
+                                      >
+                                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                                      </svg>
+                                    </a>
+                                  ) : (
+                                    <span className="text-gray-200">
+                                      {item.trim()}
+                                    </span>
+                                  )}
+                                </div>
+                              );
+                            })}
+                          </div>
                         </div>
                       )
                   )}
                 </div>
               </div>
 
-              <div className="bg-gradient-to-r from-purple-600/60 to-pink-600/60 p-6 rounded-2xl border border-gray-700/50 backdrop-blur-sm  transition-colors duration-300">
-                <h2 className="text-xl font-semibold text-white mb-5 flex items-center">
+              <div className="bg-gray-800/40 p-6 rounded-2xl border border-purple-500/30 backdrop-blur-sm hover:border-pink-400/30 transition-all duration-300">
+                <h2 className="text-xl font-semibold text-pink-300 mb-5 flex items-center">
                   <div className="bg-gray-700/50 p-1.5 rounded-lg mr-3">
                     <svg
                       className="w-5 h-5 text-pink-400"
@@ -429,54 +436,63 @@ function CompanyData() {
                     (key) =>
                       company[key] && (
                         <div key={key} className="flex flex-col">
-                          <span className="text-gray-700 text-sm font-medium mb-2">
+                          <span className="text-pink-200 text-sm font-medium mb-2">
                             {key}
                           </span>
-                          <div className="flex flex-wrap gap-3 mt-1">
-                            {company[key].includes("LinkedIn:") && (
-                              <a
-                                href={
-                                  company[key].match(
-                                    /LinkedIn: (https:\/\/[^\s,]+)/
-                                  )?.[1]
-                                }
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center px-4 py-2 rounded-xl bg-blue-900/60 text-blue-100 hover:bg-blue-800/80 transition-all border border-blue-700/50 group backdrop-blur-sm shadow-lg shadow-blue-900/20"
-                              >
-                                <svg
-                                  className="w-5 h-5 mr-2 group-hover:text-white"
-                                  fill="currentColor"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  viewBox="0 0 24 24"
-                                >
-                                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                                </svg>
-                                LinkedIn
-                              </a>
-                            )}
-                            {company[key].includes("Twitter:") && (
-                              <a
-                                href={
-                                  company[key].match(
-                                    /Twitter: (https:\/\/[^\s,]+)/
-                                  )?.[1]
-                                }
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center px-4 py-2 rounded-xl bg-sky-900/60 text-sky-100 hover:bg-sky-800/80 transition-all border border-sky-700/50 group backdrop-blur-sm shadow-lg shadow-sky-900/20"
-                              >
-                                <svg
-                                  className="w-5 h-5 mr-2 group-hover:text-white"
-                                  fill="currentColor"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  viewBox="0 0 24 24"
-                                >
-                                  <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
-                                </svg>
-                                Twitter
-                              </a>
-                            )}
+                          <div className="flex flex-wrap gap-3">
+                            {company[key]
+                              .match(/https?:\/\/[^\s,]+/g)
+                              ?.map((url, index) => {
+                                const platform = url.includes("linkedin")
+                                  ? "LinkedIn"
+                                  : url.includes("twitter")
+                                  ? "Twitter"
+                                  : url.includes("instagram")
+                                  ? "Instagram"
+                                  : url.includes("facebook")
+                                  ? "Facebook"
+                                  : "Website";
+                                return (
+                                  <a
+                                    key={index}
+                                    href={url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center px-4 py-2 rounded-lg bg-gray-700/40 hover:bg-gray-600/60 transition-all border border-purple-500/30 hover:border-pink-400/30"
+                                  >
+                                    {platform === "LinkedIn" && (
+                                      <svg
+                                        className="w-5 h-5 mr-2 text-[#0A66C2]"
+                                        fill="currentColor"
+                                        viewBox="0 0 24 24"
+                                      >
+                                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                                      </svg>
+                                    )}
+                                    {platform === "Twitter" && (
+                                      <svg
+                                        className="w-5 h-5 mr-2 text-[#1DA1F2]"
+                                        fill="currentColor"
+                                        viewBox="0 0 24 24"
+                                      >
+                                        <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
+                                      </svg>
+                                    )}
+                                    {platform === "Instagram" && (
+                                      <svg
+                                        className="w-5 h-5 mr-2 text-[#E4405F]"
+                                        fill="currentColor"
+                                        viewBox="0 0 24 24"
+                                      >
+                                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                                      </svg>
+                                    )}
+                                    <span className="text-gray-200">
+                                      {platform}
+                                    </span>
+                                  </a>
+                                );
+                              })}
                           </div>
                         </div>
                       )
@@ -490,4 +506,5 @@ function CompanyData() {
     </div>
   );
 }
+
 export default CompanyData;

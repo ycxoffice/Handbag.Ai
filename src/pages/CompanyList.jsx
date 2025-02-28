@@ -1,3 +1,4 @@
+//handbag company list
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -64,14 +65,6 @@ function CompanyList() {
     fetchData();
   }, []);
 
-  // Get unique exchanges and sectors for filters
-  const exchanges = [
-    ...new Set(companies.map((company) => company["Exchange"] || "")),
-  ].filter(Boolean);
-  const sectors = [
-    ...new Set(companies.map((company) => company["Sector"] || "")),
-  ].filter(Boolean);
-
   // Filter companies based on search term and filters
   const filteredCompanies = companies.filter((company) => {
     const matchesSearch =
@@ -81,12 +74,7 @@ function CompanyList() {
       company["Industry"]?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       company["Headquarters"]?.toLowerCase().includes(searchTerm.toLowerCase());
 
-    const matchesExchange =
-      selectedExchange === "" || company["Exchange"] === selectedExchange;
-    const matchesSector =
-      selectedSector === "" || company["Sector"] === selectedSector;
-
-    return matchesSearch && matchesExchange && matchesSector;
+    return matchesSearch;
   });
 
   const [isVisible, setIsVisible] = useState(false);
@@ -210,77 +198,6 @@ function CompanyList() {
                       onChange={(e) => setSearchTerm(e.target.value)}
                     />
                   </div>
-
-                  <div className="flex justify-between items-center">
-                    <button
-                      onClick={() => setShowFilters(!showFilters)}
-                      className="flex items-center text-gray-400 hover:text-green-500 text-sm font-medium transition-colors"
-                    >
-                      <Filter className="h-4 w-4 mr-1" />
-                      Filters
-                      <ChevronDown
-                        className={`h-4 w-4 ml-1 transition-transform ${
-                          showFilters ? "rotate-180" : ""
-                        }`}
-                      />
-                    </button>
-
-                    <div className="text-gray-500 text-sm">
-                      {filteredCompanies.length} companies found
-                    </div>
-                  </div>
-
-                  {showFilters && (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2 border-t border-gray-800 pt-4 animate-fadeIn">
-                      <div className="relative">
-                        <label className="block text-sm font-medium text-gray-400 mb-1">
-                          Exchange
-                        </label>
-                        <div className="relative">
-                          <select
-                            className="w-full pl-3 pr-10 py-2 bg-gray-800 border border-gray-700 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-green-500 text-white"
-                            value={selectedExchange}
-                            onChange={(e) =>
-                              setSelectedExchange(e.target.value)
-                            }
-                          >
-                            <option value="">All Exchanges</option>
-                            {exchanges.map((exchange, idx) => (
-                              <option key={idx} value={exchange}>
-                                {exchange}
-                              </option>
-                            ))}
-                          </select>
-                          <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                            <ChevronDown className="h-4 w-4 text-gray-400" />
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="relative">
-                        <label className="block text-sm font-medium text-gray-400 mb-1">
-                          Sector
-                        </label>
-                        <div className="relative">
-                          <select
-                            className="w-full pl-3 pr-10 py-2 bg-gray-800 border border-gray-700 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-green-500 text-white"
-                            value={selectedSector}
-                            onChange={(e) => setSelectedSector(e.target.value)}
-                          >
-                            <option value="">All Sectors</option>
-                            {sectors.map((sector, idx) => (
-                              <option key={idx} value={sector}>
-                                {sector}
-                              </option>
-                            ))}
-                          </select>
-                          <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                            <ChevronDown className="h-4 w-4 text-gray-400" />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
                 </div>
               </div>
             </div>
